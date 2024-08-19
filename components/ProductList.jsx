@@ -5,33 +5,33 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 function ProductList() {
-	const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
-	useEffect(() => {
-		fetchProducts().then(res => {
-			setProducts(res.data);
-		});
-	}, []);
+  useEffect(() => {
+    fetchProducts().then(res => {
+      setProducts(res.data);
+    });
+  }, []);
 
-	return (
-		<div>
-			<ul className={styles.container}>
-				{products &&
-					products.map(({ imageUrl, name, id }, index) => {
-						return (
-							<li className={styles.item} key={index}>
-								<Link href={`/products/${id}`}>
-									<div>
-										<Image src={imageUrl} width={300} height={300} alt={name} />
-									</div>
-									<div>{name}</div>
-								</Link>
-							</li>
-						);
-					})}
-			</ul>
-		</div>
-	);
+  return (
+    <div>
+      <ul className={styles.container}>
+        {products &&
+          products.map(({ imageUrl, name, id }, index) => {
+            return (
+              <li className={styles.item} key={index}>
+                <Link href={`/products/${id}`}>
+                  <div>
+                    <Image src={imageUrl} width={250} height={250} alt={name} />
+                  </div>
+                  <div>{name}</div>
+                </Link>
+              </li>
+            );
+          })}
+      </ul>
+    </div>
+  );
 }
 
 export default ProductList;

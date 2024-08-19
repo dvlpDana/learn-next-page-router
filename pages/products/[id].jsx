@@ -4,30 +4,31 @@ import BasicLayout from '@/layouts/BasicLayout';
 import React from 'react';
 
 function ProductDetailPage({ product }) {
-	const detail = product[0];
+  const detail = product[0];
 
-	return (
-		<BasicLayout>
-			<ProductDetail product={detail}></ProductDetail>
-		</BasicLayout>
-	);
+  return (
+    <BasicLayout>
+      <ProductDetail product={detail}></ProductDetail>
+    </BasicLayout>
+  );
 }
 
+// 페이지 라우터의 데이터 호출 함수 : getServerSideProps / getStaticProps / getStaticPaths
 export async function getServerSideProps(context) {
-	try {
-		const { data } = await fetchProductById(context.params.id);
-		return {
-			props: {
-				product: data,
-			},
-		};
-	} catch (error) {
-		return {
-			props: {
-				product: {},
-			},
-		};
-	}
+  try {
+    const { data } = await fetchProductById(context.params.id);
+    return {
+      props: {
+        product: data,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        product: {},
+      },
+    };
+  }
 }
 
 export default ProductDetailPage;
