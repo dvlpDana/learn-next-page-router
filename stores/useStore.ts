@@ -35,10 +35,9 @@ const useStore = create<StoreState>((set) => ({
   },
 
   fetchProductById: async (id: number) => {
-    // id를 string으로 변경
     try {
-      const { data } = await fetchProductById(id);
-      set({ product: data });
+      const { data } = await fetchProductById(id); // id를 number로 변환하여 전달
+      set({ product: Array.isArray(data) ? data[0] : data });
     } catch (error) {
       console.error(`Failed to fetch product with id ${id}`, error);
       set({ product: null });
